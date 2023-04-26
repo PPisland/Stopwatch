@@ -3,8 +3,10 @@ import ReportCard from "./components/RecordCard";
 
 function App() {
   const [time, setTime] = useState(0);
+  // const [prvtime, setPrevTime] = useState(0);
   const [record, setRecord] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  // const [prvrecord, setPrevRecord] = useState([]);
 
   const hour = Math.floor(time / (3600 * 100));
   const min = Math.floor((time % 360000) / 6000);
@@ -23,13 +25,16 @@ function App() {
   const onClickSave = () => {
     // const timetable = {}
     setRecord([...record, time]);
-    console.log(record);
+    // setPrevRecord([...prvrecord, prvtime]);
+    // setPrevTime(0);
+    // console.log(record);
   };
 
   useEffect(() => {
     if (isLoading) {
       let interverId = setInterval(() => {
         setTime(time + 1);
+        // setPrevTime(prvtime + 1);
       }, 10);
 
       return () => {
@@ -80,6 +85,11 @@ function App() {
       </div>
       <div className="text-2xl my-10">🚩 L A P 🚩</div>
       <div className="max-w-screen-md flex flex-col">
+        <div className="flex text-2xl  border-b-2 pb-4">
+          <div>구간</div>
+          <div className="ml-8">구간 기록</div>
+          <div className="ml-8">전체 시간</div>
+        </div>
         {record &&
           record.map((v, i) => {
             return (
